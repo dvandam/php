@@ -1,0 +1,17 @@
+{
+    "name": "danny/php",
+    "description": "idea install",
+    "authors": [
+        {
+            "name": "Danny van Dam",
+            "email": "d.van.dam@vnumedia.nl"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "phpdocumentor/phpdocumentor": "^2.8"
+    }
+}
