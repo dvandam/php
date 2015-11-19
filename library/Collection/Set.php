@@ -4,8 +4,6 @@ namespace Collection;
 
 class Set extends Collection
 {
-    use Iterator;
-
     /**
      * @param array|Iterator $values
      */
@@ -16,9 +14,9 @@ class Set extends Collection
 
     public function add($value)
     {
-        if (!in_array($value, $this->values))
+        if (!$this->has($value))
         {
-            $this->values[] = $value;
+            $this->addValue($value);
         }
     }
 }

@@ -7,8 +7,6 @@ use Option\None;
 
 class Map extends Collection
 {
-    use Iterator;
-
     /**
      * @param array|Iterator $values
      */
@@ -23,7 +21,7 @@ class Map extends Collection
      */
     public function set($key, $value)
     {
-        $this->values[$key] = $value;
+        $this->setValue($key, $value);
     }
 
     /**
@@ -32,9 +30,6 @@ class Map extends Collection
      */
     public function get($key)
     {
-        if (array_key_exists($key, $this->values)) {
-            return new Some($this->values[$key]);
-        }
-        return new None();
+        return $this->getValue($key);
     }
 }
