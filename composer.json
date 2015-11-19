@@ -1,6 +1,11 @@
 {
     "name": "danny/php",
     "description": "idea install",
+    "autoload": {
+        "psr-0": {
+            "": "library/"
+        }
+    },
     "authors": [
         {
             "name": "Danny van Dam",
