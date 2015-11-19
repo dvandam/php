@@ -1,9 +1,6 @@
 <?php
 
-abstract class Option
-{
-    abstract public function orElse($value);
-}
+namespace Option;
 
 class Some
 {
@@ -14,16 +11,13 @@ class Some
         $this->value = $value;
     }
 
-    public function orElse($value)
+    public function orElse()
     {
         return $this->value;
     }
-}
 
-class None
-{
-    public function orElse($value)
+    public function __toString()
     {
-        return $value;
+        return (string)$this->value;
     }
 }
