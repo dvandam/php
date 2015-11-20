@@ -12,6 +12,20 @@ trait Iterator
      */
     private $values = [];
 
+    public function join($glue = '')
+    {
+        return array_reduce($this->values, function(String $result, $element) use ($glue) {
+            if ($result->length() > 0) {
+                $result->add($glue);
+            }
+            $result->add((string)$element);
+        }, new String());
+    }
+
+    public function length() {
+        return count($this->values);
+    }
+
     /**
      * @param mixed $value
      * @return boolean
@@ -50,25 +64,19 @@ trait Iterator
     }
 
     /**
-     * @return None|Some
+     * @return mixed
      */
     public function current()
     {
-        if ($this->valid()) {
-            return new Some(current($this->values));
-        }
-        return new None;
+        return current($this->values);
     }
 
     /**
-     * @return None|Some
+     * @return mixed
      */
     public function key()
     {
-        if ($this->valid()) {
-            return new Some(key($this->values));
-        }
-        return new None;
+        return key($this->values);
     }
 
     public function next()

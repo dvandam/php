@@ -18,10 +18,12 @@ class Map extends Collection
     /**
      * @param string $key
      * @param mixed $value
+     * @return Map
      */
     public function set($key, $value)
     {
         $this->setValue($key, $value);
+        return $this;
     }
 
     /**

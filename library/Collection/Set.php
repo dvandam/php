@@ -12,11 +12,16 @@ class Set extends Collection
         foreach ($values as $value) $this->add($value);
     }
 
+    /**
+     * @param mixed $value
+     * @return Set
+     */
     public function add($value)
     {
         if (!$this->has($value))
         {
             $this->addValue($value);
         }
+        return $this;
     }
 }
