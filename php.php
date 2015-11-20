@@ -6,8 +6,8 @@ use Collection\String;
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$words = new Set(file('http://lamp.epfl.ch/files/content/sites/lamp/files/teaching/progfun/linuxwords.txt', FILE_IGNORE_NEW_LINES));
-//$words = new Set(["dit", "zijn", "wat", "woorden"]);
+//$words = new Set(file('http://lamp.epfl.ch/files/content/sites/lamp/files/teaching/progfun/linuxwords.txt', FILE_IGNORE_NEW_LINES));
+$words = new Set(["dit", "zijn", "wat", "woorden"]);
 $nummer = "34894569289667336";
 
 $nav = new Map([
@@ -23,23 +23,21 @@ $nav = new Map([
 
 $numbers = new Map();
 foreach ($nav as $number => $string) {
-    foreach ($string->orElse([]) as $character) {
+    foreach ($string as $character) {
         $numbers->set((string)$character, $number);
     }
 }
 
 $numberedWords = new Map();
 foreach ($words as $word) {
-    $key = '';
-    $word = $word->orElse('');
-    foreach (new String($word) as $char) {
-        $key .= $numbers->get(strtoupper($char->orElse('')))->orElse('0');
-    }
-    $wordsForKey = $numberedWords->get($key)->orElse(new Set());
-    $wordsForKey->add($word);
-    $numberedWords->set($key, $wordsForKey);
+    $key = (string)(new String($word))->map(function($character) use ($numbers) {
+        return $numbers->get(strtoupper($character))->orElse('0');
+    });
+    $numberedWords->set($key, $numberedWords->get($key)->orElse(new Set())->add($word));
 }
 
+//var_dump($numberedWords->get(9676)->orElse(new Set));
+var_dump($numberedWords->get("348")->orElse(new Set));
 var_dump($numberedWords);
 
 //function getWords($left, $right = "") {
